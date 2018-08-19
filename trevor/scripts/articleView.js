@@ -76,6 +76,7 @@ articleView.setTeasers = () => {
 
 // COMMENT: Where is this function called? Why?
 // PUT YOUR RESPONSE HERE
+// This function is called at the end of the new.html page so we can use it again every time again
 articleView.initNewArticlePage = () => {
   console.log('hello world');
   // TODO: Ensure the main .tab-content area is revealed. We might add more tabs later or otherwise edit the tab navigation.
@@ -139,7 +140,7 @@ articleView.create = () => {
 
 // COMMENT: Where is this function called? Why?
 // PUT YOUR RESPONSE HERE
-//It is called on the index.html page at the bottom. This is where you want to append your (newly created) articles.
+//It is called on the index.html page at the bottom. This is where you want to append your (newly created) articles and refresh.
 articleView.initIndexPage = () => {
   articles.forEach(article => $('#articles').append(article.toHtml()));
   articleView.populateFilters();
