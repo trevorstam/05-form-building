@@ -1,6 +1,15 @@
 'use strict';
 
 var rawData = [
+  //test article added
+  {
+    "title": "rrr",
+    "author": "r",
+    "category": "krakakaka",
+    "authorUrl": "rrr",
+    "publishedOn": "2018-08-19T22:37:32.868Z",
+    "body": "Killing it y'all"
+  },
   {
     title:       'Bob Ross Ipsum',
     category:    'art',

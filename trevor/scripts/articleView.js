@@ -77,8 +77,9 @@ articleView.setTeasers = () => {
 // COMMENT: Where is this function called? Why?
 // PUT YOUR RESPONSE HERE
 articleView.initNewArticlePage = () => {
+  console.log('hello world');
   // TODO: Ensure the main .tab-content area is revealed. We might add more tabs later or otherwise edit the tab navigation.
-$('.tab-content').show();
+  $('.tab-content').show();
 
   // TODO: The new articles we create will be copy/pasted into our source data file.
   // Set up this "export" functionality. We can hide it for now, and show it once we have data to export.
@@ -88,42 +89,57 @@ $('.tab-content').show();
   });
 
   // TODO: Add an event handler to update the preview and the export field if any inputs change.
-  $('form')on('change', 'input, textarea', articleView.create);
+  $('form').on('change', 'input, textarea', articleView.create);
 
 };
 
 articleView.create = () => {
+  // console.log('changed');
   // TODO: Set up a variable to hold the new article we are creating.
-  
-  let article = {};
-// Clear out the #articles element, so we can put in the updated preview
 
-$('#articles').html('');
+  let article = {};
+  // Clear out the #articles element, so we can put in the updated preview
+
+  $('#articles').html('');
 
   // TODO: Instantiate an article based on what's in the form fields:
-article.title = $('#title').val();
-article.author = $('#author').val();
-article.category = $('#category').val();
-article.authorUrl = $('#authorUrl').val();
-article.body = $('#body').val();
+  article.title = $('#title').val();
+  article.author = $('#author').val();
+  article.category = $('#category').val();
+  article.authorUrl = $('#authorUrl').val();
+  article.publishedOn = $('input:checked').length ? new Date() : null;
+  article.body = $('#body').val();
+  
+  
+  
+
+  console.log(article);
 
 
-let post = new Article(article);
+
+  let post = new Article(article);
 
 
 
   // TODO: Use our interface to the Handblebars template to put this new article into the DOM:
-$('#articles').html(post.toHtml());
+  $('#articles').html(post.toHtml());
 
   // TODO: Activate the highlighting of any code blocks; look at the documentation for hljs to see how to do this by placing a callback function in the .each():
-  $('pre code').each();
+  $('pre code').each(function (i, block) {
+    hljs.highlightBlock(block);
+  });
 
   // TODO: Show our export field, and export the new article as JSON, so it's ready to copy/paste into blogArticles.js:
+  $('#article-export').show();
+  //target json output. grab the value which is the article in JSON stringified.
+  $('#json-output').val(`${JSON.stringify(article)},`); //don't forget the comma at the end!!!!
+  console.log('hello');
 
 };
 
 // COMMENT: Where is this function called? Why?
 // PUT YOUR RESPONSE HERE
+//It is called on the index.html page at the bottom. This is where you want to append your (newly created) articles.
 articleView.initIndexPage = () => {
   articles.forEach(article => $('#articles').append(article.toHtml()));
   articleView.populateFilters();

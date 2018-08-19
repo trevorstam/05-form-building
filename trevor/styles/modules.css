@@ -64,7 +64,7 @@ a:hover, a:focus {
 /* === FORM STYLES === */
 
 label {
-  font-size: 3em;
+  font-size: 1em;
 }
 
 input {
@@ -95,6 +95,16 @@ input:invalid, textarea:invalid {
 
 input:valid, textarea:valid {
   border-color: #89CB8E;
+}
+
+#article-export {
+  overflow: hidden;
+}
+
+#json-output {
+  opacity: .75;
+  width: 65%;
+  float: right;
 }
 
 /* === ICON FONT === */

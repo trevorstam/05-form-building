@@ -13,6 +13,22 @@
   <!-- NOTE (stretch goal): To fully incorporate the highlighting library "hljs" we need to fill the empty link tag below to refer to a CSS file that will handle our text highlighting -->
   <link>
   <!-- TODO: We want our new article form to be able to display a preview of the article that is being entered. Thus, we need code here that will recreate the same structure of our other articles. What do you think we need to add here? -->
+  <script id="article-template" type="text/x-handlebars-template">
+    <article class="clearfix" data-author="{{author}}" data-category="{{category}}">
+      <header>
+        <h1>{{title}}</h1>
+        <div>
+          By
+          <address>
+            <a href="{{authorUrl}}">{{author}}</a>
+          </address>
+          {{publishStatus}}
+        </div>
+      </header>
+      <section class="article-body">{{{body}}}</section>
+      <a href="#" class="read-on">Read on &rarr;</a>
+    </article>
+  </script>
 </head>
 
 <body>
@@ -40,13 +56,7 @@
 
     <section id="write" class="tab-content">
       <h1>Create New Article</h1>
-      <form>
-        <input id="title" placeholder="Title">
-        <input id="author" placeholder="Author Name">
-        <input id="authorUrl" placeholder="Author URL">
-        <input id="category" placeholder="Category">
-        <textarea name="body" id="body">Article content here</textarea>
-      </form>
+
       <!-- TODO: Set up a form to accept user input for a new blog article. Remember that we need:
            1. Article title
            2. Article body
@@ -56,6 +66,16 @@
            6. Some way to know if this article is a draft or is published -->
       <!-- function Article (rawDataObj) { this.author = rawDataObj.author; this.authorUrl = rawDataObj.authorUrl; this.title = rawDataObj.title;
 this.category = rawDataObj.category; this.body = rawDataObj.body; this.publishedOn = rawDataObj.publishedOn; } -->
+      <form>
+        <input id="title" name="title" placeholder="Title">
+        <input id="author" name="author" placeholder="Author Name">
+        <input id="authorUrl" name="authorUrl" placeholder="Author URL">
+        <input id="category" name="category" placeholder="Category">
+        <textarea id="body" name="body" placeholder="Article content here"></textarea>
+        <input id="publishedOn" name="publishedOn" type="checkbox">
+        <label for="publishedOn">Published</label>
+
+      </form>
     </section>
 
     <section id="articles" class="tab-content">
@@ -63,8 +83,10 @@ this.category = rawDataObj.category; this.body = rawDataObj.body; this.published
     </section>
 
     <section id="article-export">
-      <input id="json-output">
+
+      <label for="json-output">Export JSON:</label>
       <!-- TODO: Refer to the preview image to see what we will be building here: we need a container of some kind to hold a JSON export of our article. Ideally this container would show only a incipit (short preview) of the JSON and also be clickable to allow easy selection of the text it holds. What kind of element could we use for this? -->
+      <input id="json-output">
     </section>
 
   </main>
@@ -74,6 +96,7 @@ this.category = rawDataObj.category; this.body = rawDataObj.body; this.published
 
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.0.11/handlebars.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
   <!-- NOTE (stretch goal): Include script tags for 3rd party libraries to enable Markdown rendering and code syntax highlighting. Use the minified CDN. Keep in mind that if we want these features to render properly on our main blog page (index.html) that we'll need to add those scripts over there, too. -->
   <script src="scripts/blogArticles.js"></script>
   <script src="scripts/article.js"></script>
@@ -82,9 +105,11 @@ this.category = rawDataObj.category; this.body = rawDataObj.body; this.published
     // TODO: We will need to call a function here to initialize the behaviors on this page, once we get them built out. Why?
     // (Look at the bottom of index.html as a reference. Since we are now using our JS on two different HTML pages that have different needs as to what parts of the code they utilize, we need to build a function that inializes each page.)
     //  Hint: Look in articleView.js for a function that does this.
+    articleView.initNewArticlePage();
 
     // COMMENT: What is this function doing? Why do we need it?
     // PUT YOUR RESPONSE HERE
+    // This function creates a new article, turns it into JSON so you can copy/paste it into blogArticles.js
   </script>
 </body>
 
